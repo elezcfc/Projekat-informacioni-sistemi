@@ -2,11 +2,15 @@ package download;
 
 import java.io.IOException;
 
+import javax.sql.DataSource;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
 import photo.Picture;
+import weka.core.Instances;
+import weka.core.converters.ArffSaver;
+import weka.core.converters.JSONLoader;
 
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
@@ -20,6 +24,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -77,12 +82,27 @@ public class PhotoInfoDownloader {
 	    }
 		return photoset;		
 	}
+	public static void toArff () throws IOException{
+		File file = new File("data/pictureInfo.json");
+		JSONLoader jsonLoader = new JSONLoader();
+		jsonLoader.setSource(file);
+		Instances instances = jsonLoader.getDataSet();
+		ArffSaver arffSaver = new ArffSaver();
+		arffSaver.setInstances(instances);
+		arffSaver.setFile(new File("data/pictureInfo.arff"));
+		arffSaver.writeBatch();
+		System.out.println("Arff file kreiran");
+	}
 
 	public static void main(String[]args){
 		try {
 			createJson(getPictures(idSet));
+			toArff();
 		} catch (FlickrException e) {
 			System.out.println("Flickr problem");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
