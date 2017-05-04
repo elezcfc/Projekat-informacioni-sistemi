@@ -7,28 +7,28 @@ import java.util.Date;
 public class Picture {
 
 	private String id;
-	private String owner;
+	//private String owner;
 	private String title;
 	public ArrayList tags;
-	private String location;
+	//private String location;
 	private Date [] dates;
 	
-	public Picture (String i, String o, String t, String l){
+	public Picture (String i, String t){
 		id = i;
-		owner = o;
+		//owner = o;
 		title = t;
 		tags = new ArrayList();
-		location = l;
+		//location = l;
 		dates = new Date[2];
 	}
 
-	public String getOwner() {
+	/*public String getOwner() {
 		return owner;
 	}
 
 	public void setOwner(String owner) {
 		this.owner = owner;
-	}
+	}*/
 
 	public String getTitle() {
 		return title;
@@ -38,13 +38,13 @@ public class Picture {
 		this.title = title;
 	}
 
-	public String getLocation() {
+	/*public String getLocation() {
 		return location;
 	}
 
 	public void setLocation(String location) {
 		this.location = location;
-	}
+	}*/
 
 	public Date[] getDates() {
 		return dates;
@@ -64,8 +64,8 @@ public class Picture {
 
 	@Override
 	public String toString() {
-		return "Picture [id=" + id + ", owner=" + owner + ", title=" + title
-				+ ", tags=" + tags + ", location=" + location + ", dates="
+		return "Picture [id=" + id + ",  title=" + title
+				+ ", tags=" + tags + ", dates="
 				+ Arrays.toString(dates) + "]";
 	}
 	
