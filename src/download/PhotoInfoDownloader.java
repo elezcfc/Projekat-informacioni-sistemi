@@ -7,7 +7,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import photo.Picture;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
 import weka.core.converters.JSONLoader;
@@ -20,6 +19,7 @@ import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.PhotosInterface;
 import com.flickr4java.flickr.photosets.PhotosetsInterface;
+import com.flickr4java.flickr.tags.Tag;
 import com.google.gson.GsonBuilder;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -27,6 +27,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+
+import domen.Picture;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -67,7 +69,7 @@ public class PhotoInfoDownloader {
 		Picture p = new Picture(slika.getId(), slika.getTitle());
 		for(int i = 0; i < slika.getTags().size(); i++){
 			if(((ArrayList) slika.getTags()).get(i) != null){
-				p.tags.add(((ArrayList) slika.getTags()).get(i));
+				p.tags.add(((ArrayList<Tag>) slika.getTags()).get(i));
 			}	
 		}
 		Date dates [] = new Date[]{slika.getDatePosted(), slika.getDateTaken()};
@@ -134,8 +136,8 @@ public class PhotoInfoDownloader {
 			Photo slika = pi.getInfo(id, secret);
 			Picture p = new Picture(slika.getId(), slika.getTitle());
 			for(int i = 0; i < slika.getTags().size(); i++){
-				if(((ArrayList) slika.getTags()).get(i) != null){
-					p.tags.add(((ArrayList) slika.getTags()).get(i));
+				if(((ArrayList<Tag>) slika.getTags()).get(i) != null){
+					p.tags.add(((ArrayList<Tag>) slika.getTags()).get(i));
 				}	
 			}
 			Date dates [] = new Date[]{slika.getDatePosted(), slika.getDateTaken()};

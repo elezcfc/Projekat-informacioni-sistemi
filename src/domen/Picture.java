@@ -1,15 +1,17 @@
-package photo;
+package domen;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+
+import com.flickr4java.flickr.tags.Tag;
 
 public class Picture {
 
 	private String id;
 	//private String owner;
 	private String title;
-	public ArrayList tags;
+	public ArrayList<Tag> tags;
 	//private String location;
 	private Date [] dates;
 	
@@ -17,7 +19,7 @@ public class Picture {
 		id = i;
 		//owner = o;
 		title = t;
-		tags = new ArrayList();
+		tags = new ArrayList<Tag>();
 		//location = l;
 		dates = new Date[2];
 	}
@@ -67,6 +69,14 @@ public class Picture {
 		return "Picture [id=" + id + ",  title=" + title
 				+ ", tags=" + tags + ", dates="
 				+ Arrays.toString(dates) + "]";
+	}
+
+	public ArrayList<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(ArrayList<Tag> tags) {
+		this.tags = tags;
 	}
 	
 	
